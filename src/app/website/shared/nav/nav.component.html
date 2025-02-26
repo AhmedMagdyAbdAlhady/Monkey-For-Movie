@@ -13,21 +13,8 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="/"  routerLinkActive="text-danger" [routerLinkActiveOptions]="{exact:true}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="trending" routerLinkActive="text-danger">Trending</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="new-movies" routerLinkActive="text-danger">New Movies</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              another Type
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="Comedy" routerLinkActive="text-danger">Comedy</a></li>
-              <li><a class="dropdown-item" routerLink="Fantasy" routerLinkActive="text-danger">Fantasy</a></li>
-              <li><a class="dropdown-item" routerLink="Adventure" routerLinkActive="text-danger">Adventure</a></li>
-            </ul>
+          <li class="nav-item" *ngFor="let item of navItems">
+            <a class="nav-link" [routerLink]="['category/',item.url]" routerLinkActive="text-danger">{{item.title}}</a>
           </li>
         </ul>
       </div>

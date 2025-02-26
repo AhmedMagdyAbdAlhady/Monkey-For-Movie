@@ -8,5 +8,22 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 Home: any;
-
+navItems=[
+  {
+    title:"Trending",
+    url:"Trending Movies"
+  },
+  {
+    title:"New Movies",
+    url:"New Movies"
+  },
+  {
+    title:"  Animation  ",
+    url:"Best Animation Movies"
+  },
+  {
+    title:"Famility",
+    url:"Famility Time"
+  }
+]
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewMoviesComponent } from './new-movies.component';
+import { CategoryPageComponent } from './category-page.component';
 
-describe('NewMoviesComponent', () => {
-  let component: NewMoviesComponent;
-  let fixture: ComponentFixture<NewMoviesComponent>;
+describe('CategoryPageComponent', () => {
+  let component: CategoryPageComponent;
+  let fixture: ComponentFixture<CategoryPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NewMoviesComponent]
+      declarations: [CategoryPageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewMoviesComponent);
+    fixture = TestBed.createComponent(CategoryPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

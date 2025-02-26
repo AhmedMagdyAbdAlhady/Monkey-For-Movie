@@ -17,11 +17,11 @@ interface Movie {
 export class HomeComponent {
   
   movies: any;
-  headerSliderType = "Movies you can watch for Free"
+  headerSliderType = "Get a shot of adrenaline"
   sliderHeader: Movie[] = [];
   filmCards: Movie[] = []
   categories: any[] = [];
-  constructor(private apiService: ApiHomeService) { }
+  constructor(private apiService: ApiHomeService,private spinner: NgxSpinnerService) { }
 
 
   createsliderimage(items: any, type: string) {
@@ -35,8 +35,10 @@ export class HomeComponent {
 
   }
   ngOnInit() {
+    this.spinner.show()
     this.apiService.getMovies().subscribe(
       response => {
+
         this.movies = response;
       },
       error => {
@@ -52,6 +54,8 @@ export class HomeComponent {
       },
       (error) => {
         console.error('Error fetching movies:', error);
+      },()=>{
+        this.spinner.hide()
       }
     );
   }

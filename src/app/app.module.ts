@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -13,15 +12,14 @@ import { register } from 'swiper/element/bundle';
 register();
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent,    
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

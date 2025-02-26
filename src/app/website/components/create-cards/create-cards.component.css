@@ -1,0 +1,31 @@
+.filmcard{
+    & .card-img-overlay{
+        display: none;
+    }
+    &:hover{
+       & img{
+        transform: scale(1.5) rotateZ(5deg);
+        transition: .4s;
+       }
+       & .card-img-overlay{
+        display: block;
+       }
+       
+    }
+    & .genres{
+        font-size: .7em;
+        font-weight: bold;
+     &::after{
+        content: "";
+        content: "";
+        width: 0;
+        z-index: 0;
+        height: 0;
+        position: absolute;
+        top: 17px;
+        left: 0px;
+        border-top: solid 14px #ffc107;
+        border-left: solid 14px transparent;
+        }
+    }
+}

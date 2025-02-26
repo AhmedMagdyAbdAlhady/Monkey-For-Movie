@@ -8,10 +8,11 @@ import { SingleMovieComponent } from './pages/single-movie/single-movie.componen
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { TrendingComponent } from './pages/trending/trending.component';
-import { NewMoviesComponent } from './pages/new-movies/new-movies.component';
 import { SliderHeaderComponent } from './components/slider-header/slider-header.component';
 import { GoSinglePageComponent } from './components/button/go-single-page/go-single-page.component';
+import { CreateCardsComponent } from './components/create-cards/create-cards.component';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -22,14 +23,15 @@ import { GoSinglePageComponent } from './components/button/go-single-page/go-sin
     NavComponent,
     FooterComponent,
     ErrorComponent,
-    TrendingComponent,
-    NewMoviesComponent,
     SliderHeaderComponent,
-    GoSinglePageComponent
+    GoSinglePageComponent,
+    CreateCardsComponent,
+    CategoryPageComponent,
   ],
   imports: [
     CommonModule,
-    WebsiteRoutingModule
+    WebsiteRoutingModule,
+    NgxSpinnerModule
   ]
 })
 export class WebsiteModule { }

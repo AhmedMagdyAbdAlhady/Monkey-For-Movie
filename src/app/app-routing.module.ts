@@ -5,7 +5,7 @@ const routes: Routes = [{ path: '', loadChildren: () => import('./website/websit
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes , {scrollPositionRestoration:'top'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

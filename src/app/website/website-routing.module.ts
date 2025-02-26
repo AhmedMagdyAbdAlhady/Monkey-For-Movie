@@ -4,19 +4,17 @@ import { WebsiteComponent } from './website.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SingleMovieComponent } from './pages/single-movie/single-movie.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { TrendingComponent } from './pages/trending/trending.component';
-import { NewMoviesComponent } from './pages/new-movies/new-movies.component';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
 
 const routes: Routes = [{ path: '', component: WebsiteComponent , children:[
   { path: '', component: HomeComponent},
-  { path: 'trending', component: TrendingComponent},
-  { path: 'new-movies', component: NewMoviesComponent},
+  { path: 'category/:categoryName', component: CategoryPageComponent},
   { path: 'single-movie/:id', component: SingleMovieComponent},
   { path: '**', component:ErrorComponent },
 ]}];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes )],
   exports: [RouterModule]
 })
 export class WebsiteRoutingModule { }
