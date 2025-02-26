@@ -1,0 +1,35 @@
+
+<nav class="navbar bg-dark border-bottom border-body navbar-expand-lg playfair-display position-sticky top-0 z-3 "  data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand col-7 col-md-3 row align-items-center " routerLink="/">
+        <img class="col-3 col-md-2 p-0" src="logo\Brown and Pink Illustrative Monkey Gaming Logo.png" alt="logo"> 
+        <p class="col-7 p-0 pt-2 italic">Monkey</p>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto ">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/"  routerLinkActive="text-danger" [routerLinkActiveOptions]="{exact:true}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="trending" routerLinkActive="text-danger">Trending</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="new-movies" routerLinkActive="text-danger">New Movies</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              another Type
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="Comedy" routerLinkActive="text-danger">Comedy</a></li>
+              <li><a class="dropdown-item" routerLink="Fantasy" routerLinkActive="text-danger">Fantasy</a></li>
+              <li><a class="dropdown-item" routerLink="Adventure" routerLinkActive="text-danger">Adventure</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
