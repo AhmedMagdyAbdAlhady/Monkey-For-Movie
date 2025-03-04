@@ -25,7 +25,6 @@ export class GetDataService {
         let MovieItem: any[] = []
         let relatedMovies: any = []
         for (const categoryMovie of categories) {
-          console.log(categoryMovie.title)
           if (categoryMovie.title == category) {
             MovieItem = [...categoryMovie.movies];
           }

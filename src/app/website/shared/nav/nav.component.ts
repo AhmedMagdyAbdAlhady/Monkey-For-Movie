@@ -23,7 +23,7 @@ navItems=[
   },
   {
     title:"Famility",
-    url:"Famility Time"
+    url:"Famility-Time"
   }
 ]
 }

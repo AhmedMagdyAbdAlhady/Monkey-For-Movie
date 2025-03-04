@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrl: './single-movie.component.css'
 })
 export class SingleMovieComponent {
-  movie : any 
+  movie: any;
   category:any
  constructor(private activated: ActivatedRoute,
     private getdata: GetDataService,
@@ -23,14 +23,12 @@ export class SingleMovieComponent {
       const id = params.get("id");
       const categoryName = params.get("category");
       this.category =categoryName
-      console.log(id)
       if (!id) {
         this.router.navigate(['/']);
         return;
       }
       this.spinner.show()
       this.getdata.getMovieById(categoryName,id).subscribe((res) => {
-        console.log(res)
         if (!res) {
           this.router.navigate(['/']);
         } else {
