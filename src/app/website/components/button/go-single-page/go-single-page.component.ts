@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class GoSinglePageComponent {
 @Input() id:any;
+@Input() category:any
+
 }

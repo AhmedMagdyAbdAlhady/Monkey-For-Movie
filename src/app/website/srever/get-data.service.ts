@@ -12,11 +12,36 @@ export class GetDataService {
     return this.http.get<any[]>(this.apiurl).pipe(
       map(categorys =>
         categorys
-          .filter(category=>category.title==categoryName)
-          .map(category=>({
+          .filter(category => category.title == categoryName)
+          .map(category => ({
             title: category.title,
-            movies: category.movies ? category.movies : [] 
+            movies: category.movies ? category.movies : []
           }))
       ))
-}
+  }
+  getMovieById(category: any, id: any): Observable<any[]> {
+    return this.http.get<any[]>(this.apiurl).pipe(
+      map(categories => {
+        let MovieItem: any[] = []
+        let relatedMovies: any = []
+        for (const categoryMovie of categories) {
+          console.log(categoryMovie.title)
+          if (categoryMovie.title == category) {
+            MovieItem = [...categoryMovie.movies];
+          }
+          for (const i of MovieItem) {
+            if (String(i._id) !== id && relatedMovies.length < 6) {
+              relatedMovies.push(i)
+            }
+          }
+          for (const item of categoryMovie.movies) {
+            if (item._id == id) {
+              return [item, relatedMovies]
+            }
+          }
+        }
+        return [];
+      })
+    );
+  }
 }

@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CreateCardsComponent {
 @Input() arraymovies:any 
+@Input() category:any
+
 }

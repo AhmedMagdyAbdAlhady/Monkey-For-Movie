@@ -9,7 +9,7 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 const routes: Routes = [{ path: '', component: WebsiteComponent , children:[
   { path: '', component: HomeComponent},
   { path: 'category/:categoryName', component: CategoryPageComponent},
-  { path: 'single-movie/:id', component: SingleMovieComponent},
+  { path: 'single/:category/:id', component: SingleMovieComponent},
   { path: '**', component:ErrorComponent },
 ]}];
 

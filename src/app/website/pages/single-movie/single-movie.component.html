@@ -1,1 +1,25 @@
-<p>single-movie works!</p>
+<div class="bg-dark py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                <div class="card  shadowWhite ">
+                    <img  class="card-img" [src]="movie[0]?.poster_path" alt="">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <h2 class="text-white playfair-display italic mb-5">{{movie[0]?.title}}</h2>
+                <ng-content *ngFor="let i of movie[0]?.genres">
+                    <span class="bg-warning px-3 me-2 py-1 rounded-4 italic ">{{i}}</span>
+                </ng-content>
+                <p class="text-white playfair-display fs-5 my-3">{{movie[0]?.overview}}</p>
+            </div>
+            <div class="col-12 col-lg-2">   
+                 <!-- <app-download></app-download> -->
+            </div>
+            <div>
+                <h2 class="text-white playfair-display italic mt-5 mb-3">Watch other shows</h2>
+                <app-create-cards [arraymovies]="movie[1] " [category]="category"></app-create-cards>
+            </div>
+        </div>  
+    </div>
+</div>
