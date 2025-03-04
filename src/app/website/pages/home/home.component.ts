@@ -50,7 +50,6 @@ export class HomeComponent {
     this.apiService.getLast10MoviesFromEachCategory().subscribe(
       (data) => {
         this.categories = data;
-        console.log(data)
       },
       (error) => {
         console.error('Error fetching movies:', error);
