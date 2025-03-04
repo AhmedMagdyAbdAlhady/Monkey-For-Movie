@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetDataService {
-  apiurl = "/api.json"
+  apiurl = "./api.json"
   constructor(private http: HttpClient) { }
   getSpecialCategory(categoryName: any): Observable<any> {
     return this.http.get<any[]>(this.apiurl).pipe(

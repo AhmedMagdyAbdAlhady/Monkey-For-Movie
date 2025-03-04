@@ -7,7 +7,7 @@ import { map, Observable } from 'rxjs';
 })
 export class ApiHomeService {
 
-  apiurl = "/api.json"
+  apiurl = "./api.json"
   
   constructor(private http: HttpClient) {}
   getMovies(): Observable<any> {
