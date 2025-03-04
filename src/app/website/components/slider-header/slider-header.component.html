@@ -9,7 +9,7 @@
                         <div class="z-3 position-absolute   text-white col-4 sliderBody">
                             <h2 class="playfair-display text-start" *ngIf="movie?.title">{{movie.title}}</h2>
                         </div>
-                        <app-go-single-page *ngIf="movie?._id"  [id]="movie?._id"></app-go-single-page>
+                        <app-go-single-page *ngIf="movie?._id"  [id]="movie?._id" [category]="categoryHeader"></app-go-single-page>
                     </div>
                 </div>
             </ng-container>

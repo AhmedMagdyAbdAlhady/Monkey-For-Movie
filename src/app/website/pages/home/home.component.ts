@@ -17,7 +17,7 @@ interface Movie {
 export class HomeComponent {
   
   movies: any;
-  headerSliderType = "Get a shot of adrenaline"
+  headerSliderType = "Most Trending Shows"
   sliderHeader: Movie[] = [];
   filmCards: Movie[] = []
   categories: any[] = [];

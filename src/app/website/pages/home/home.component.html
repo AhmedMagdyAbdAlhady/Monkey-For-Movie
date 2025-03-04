@@ -1,4 +1,4 @@
-<app-slider-header [sliderHeader]="sliderHeader"></app-slider-header>
+<app-slider-header [sliderHeader]="sliderHeader"[categoryHeader]="headerSliderType" > </app-slider-header>
 <div class="bg-dark">
 
     <div class="container ">
@@ -13,7 +13,7 @@
                         </span>
                     </h3>
                 </div>
-                <app-create-cards [arraymovies]="category.movies " ></app-create-cards>
+                <app-create-cards [arraymovies]="category.movies " [category]="category.title"  ></app-create-cards>
             
             </div>
         </div>

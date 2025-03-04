@@ -15,6 +15,7 @@ interface Movie {
 })
 export class CategoryPageComponent {
   sliderHeader: Movie[] = [];
+  category:any = ''
   arrayMovies: any
   title:string | undefined
   constructor(private activated: ActivatedRoute,
@@ -25,7 +26,7 @@ export class CategoryPageComponent {
   ngOnInit() {
     this.activated.paramMap.subscribe((params) => {
       const categoryName = params.get("categoryName");
-
+      this.category =categoryName;
       if (!categoryName) {
         this.router.navigate(['/']);
         return;

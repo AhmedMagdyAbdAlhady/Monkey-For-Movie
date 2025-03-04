@@ -12,6 +12,7 @@ import 'swiper/css/thumbs';
 })
 export class SliderHeaderComponent {
   @Input() sliderHeader: any;
+  @Input() categoryHeader: any;
   swiperfunction() {
     setTimeout(() => {
       const swipermain = new Swiper(".mySwiper", {
