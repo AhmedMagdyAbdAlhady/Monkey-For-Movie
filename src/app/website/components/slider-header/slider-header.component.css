@@ -67,7 +67,7 @@ body {
  /* `sm` applies to x-small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
   .mySwiper2{
-    height: 35vh;
+    height: 50vh;
   }
  }
 
@@ -92,7 +92,7 @@ body {
     height: auto;
   }
   .mySwiper2{
-    height: 30vh;
+    /* height: 30vh; */
     & .sliderBody{
       & h2{
         font-size: 1.5em;
