@@ -1,12 +1,12 @@
 <header>
     <div  class=" swiper mySwiper2 ">
-        <div class="swiper-wrapper ">
+        <div class="swiper-wrapper  col-6 ">
             <ng-container *ngFor="let movie of sliderHeader">
                 <div class="swiper-slide  " *ngIf="movie?.backdrop_path">
                     <div class="position-relativ " >
                         <img *ngIf="movie?.backdrop_path" src={{movie.backdrop_path}} />
                         <div class="ovelay col-12  z-1  position-absolute bg-dark opacity-50 top-0 start-0  rounded-3"> </div>
-                        <div class="z-3 position-absolute   text-white col-4 sliderBody">
+                        <div class="z-3 position-absolute   text-white  col-9 col-md-6 col-lg-4 sliderBody">
                             <h2 class="playfair-display text-start" *ngIf="movie?.title">{{movie.title}}</h2>
                         </div>
                         <app-go-single-page *ngIf="movie?._id"  [id]="movie?._id" [category]="categoryHeader"></app-go-single-page>
