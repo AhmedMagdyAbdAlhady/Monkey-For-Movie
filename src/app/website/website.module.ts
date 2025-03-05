@@ -13,6 +13,9 @@ import { GoSinglePageComponent } from './components/button/go-single-page/go-sin
 import { CreateCardsComponent } from './components/create-cards/create-cards.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { DownloadButtonComponent } from './components/download-button/download-button.component';
+import { DownloadComponent } from './components/button/download/download.component';
+import { WatchComponent } from './components/button/watch/watch.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     GoSinglePageComponent,
     CreateCardsComponent,
     CategoryPageComponent,
+    DownloadButtonComponent,
+    DownloadComponent,
+    WatchComponent,
   ],
   imports: [
     CommonModule,
