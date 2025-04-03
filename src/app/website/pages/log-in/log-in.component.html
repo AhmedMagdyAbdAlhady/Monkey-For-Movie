@@ -1,0 +1,25 @@
+<div class="bg-dark py-2">
+  <div class="container d-flex justify-content-center py-5">
+    <form [formGroup]="loginForm" class="bg-white col-12 col-md-4  p-5 my-5 rounded-4" (ngSubmit)="handleSubmit()">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1"
+          aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text text-danger" *ngIf="isSubmited && formControls.email.invalid">
+          <span *ngIf="formControls.email.errors?.['required']">Email is required</span>
+          <span *ngIf="formControls.email.errors?.['email']">Email valid</span>.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" aria-describedby="passwordHellp">
+        <div id="passwordHellp" class="form-text text-danger" *ngIf="isSubmited && formControls.password.invalid">
+          <span *ngIf="formControls.password.errors?.['required']">password is required</span>
+        </div>
+      </div>
+
+      <a [routerLink]="['/singup']"  class="btn text-success col-4 mb-3 ">sing up </a>
+      <button type="submit" class="btn btn-primary col-12">Submit</button>
+    </form>
+  </div>
+</div>

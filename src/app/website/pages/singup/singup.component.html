@@ -1,0 +1,138 @@
+<div class="bg-dark py-2">
+  <div class="container d-flex justify-content-center py-5">
+    <form
+      [formGroup]="signupForm"
+      class="bg-white col-12 col-md-6 p-5 my-5 rounded-4 row"
+      (ngSubmit)="onSubmit()"
+    >
+      <!-- First Name -->
+      <div class="mb-3 col-6">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          formControlName="firstName"
+          class="form-control"
+          id="firstName"
+        />
+        <div class="text-danger mt-1">
+          <span *ngIf="formControls.firstName.errors?.['required'] && (isSubmitted || formControls.firstName.touched)">
+            First name is required
+          </span>
+          <span *ngIf="formControls.firstName.errors?.['minlength'] && (isSubmitted || formControls.firstName.touched)">
+            Minimum 3 characters
+          </span>
+          <span *ngIf="formControls.firstName.errors?.['pattern'] && (isSubmitted || formControls.firstName.touched)">
+            Only letters and numbers allowed
+          </span>
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="mb-3 col-6">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          formControlName="lastName"
+          class="form-control"
+          id="lastName"
+        />
+        <div class="text-danger mt-1">
+          <span *ngIf="formControls.lastName.errors?.['required'] && (isSubmitted || formControls.lastName.touched)">
+            Last name is required
+          </span>
+          <span *ngIf="formControls.lastName.errors?.['minlength'] && (isSubmitted || formControls.lastName.touched)">
+            Minimum 3 characters
+          </span>
+          <span *ngIf="formControls.lastName.errors?.['pattern'] && (isSubmitted || formControls.lastName.touched)">
+            Only letters and numbers allowed
+          </span>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="mb-3 col-12">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          formControlName="username"
+          class="form-control"
+          id="username"
+        />
+        <div class="text-danger mt-1">
+          <span *ngIf="formControls.username.errors?.['required'] && (isSubmitted || formControls.username.touched)">
+            Username is required
+          </span>
+          <span *ngIf="formControls.username.errors?.['minlength'] && (isSubmitted || formControls.username.touched)">
+            Minimum 3 characters
+          </span>
+          <span *ngIf="formControls.username.errors?.['pattern'] && (isSubmitted || formControls.username.touched)">
+            Only letters and numbers allowed
+          </span>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3 col-12">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          id="email"
+        />
+        <div class="text-danger mt-1">
+          <span *ngIf="formControls.email.errors?.['required'] && (isSubmitted || formControls.email.touched)">
+            Email is required
+          </span>
+          <span *ngIf="formControls.email.errors?.['email'] && (isSubmitted || formControls.email.touched)">
+            Invalid email format
+          </span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3 col-12">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          id="password"
+        />
+        <div class="text-danger mt-1">
+          <span *ngIf="formControls.password.errors?.['required'] && (isSubmitted || formControls.password.touched)">
+            Password is required
+          </span>
+          <span *ngIf="formControls.password.errors?.['pattern'] && (isSubmitted || formControls.password.touched)">
+            Minimum 8 characters with uppercase, lowercase, number, and special character
+          </span>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3 col-12">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          class="form-control"
+          id="confirmPassword"
+        />
+        <div class="text-danger mt-1">
+          <span *ngIf="formControls.confirmPassword.errors?.['required'] && (isSubmitted || formControls.confirmPassword.touched)">
+            Confirmation is required
+          </span>
+          <span *ngIf="signupForm.errors?.['mismatch'] && isSubmitted">
+            Passwords do not match
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100" >
+          Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

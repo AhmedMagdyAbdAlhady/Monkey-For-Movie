@@ -16,6 +16,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { DownloadButtonComponent } from './components/download-button/download-button.component';
 import { DownloadComponent } from './components/button/download/download.component';
 import { WatchComponent } from './components/button/watch/watch.component';
+import { LogInComponent } from './pages/log-in/log-in.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SingupComponent } from './pages/singup/singup.component';
 
 
 @NgModule({
@@ -33,11 +36,14 @@ import { WatchComponent } from './components/button/watch/watch.component';
     DownloadButtonComponent,
     DownloadComponent,
     WatchComponent,
+    LogInComponent,
+    SingupComponent,
   ],
   imports: [
     CommonModule,
     WebsiteRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule
   ]
 })
 export class WebsiteModule { }
