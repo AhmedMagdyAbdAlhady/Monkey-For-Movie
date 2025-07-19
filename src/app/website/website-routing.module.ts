@@ -7,13 +7,14 @@ import { ErrorComponent } from './pages/error/error.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { SingupComponent } from './pages/singup/singup.component';
+import { canDeactivateGuard } from './guards/can-deactivate.guard';
 
 const routes: Routes = [{ path: '', component: WebsiteComponent , children:[
   { path: '', component: HomeComponent},
-  { path: 'category/:categoryName', component: CategoryPageComponent},
-  { path: 'logIn', component: LogInComponent},
-  { path: 'singup', component: SingupComponent},
-  { path: 'single/:category/:id', component: SingleMovieComponent},
+  { path: ':categoryName', component: CategoryPageComponent},
+  { path: 'logIn', component: LogInComponent, canDeactivate:[canDeactivateGuard]},
+  { path: 'singup', component: SingupComponent, canDeactivate:[canDeactivateGuard]},
+  { path: ':category/:id', component: SingleMovieComponent},
   { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: '**', component:ErrorComponent },
 ]}];

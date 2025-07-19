@@ -14,7 +14,7 @@
             <a class="nav-link" aria-current="page" routerLink="/"  routerLinkActive="text-danger" [routerLinkActiveOptions]="{exact:true}">Home</a>
           </li>
           <li class="nav-item" *ngFor="let item of navItems">
-            <a class="nav-link" [routerLink]="['/',item.url]" routerLinkActive="text-danger">{{item.title}}</a>
+            <a class="nav-link" [routerLink]="['category/',item.url]" routerLinkActive="text-danger">{{item.title}}</a>
           </li>
           <li class="nav-item" *ngIf="!authService.user ">
             <a class="nav-link" aria-current="page" routerLink="logIn"  routerLinkActive="text-danger">login</a>

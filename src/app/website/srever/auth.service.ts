@@ -8,31 +8,43 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-   islogIn:boolean =false
-  private apiUrl = 'http://localhost:3000/api'; // رابط الـ API
-   authTokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('authToken'));
-  authToken$ = this.authTokenSubject.asObservable();
-  user: any = null; // تخزين بيانات المستخدم
+  islogIn: boolean = false;
+  private apiUrl = 'http://localhost:3000/api';
+  auth_tokenSubject = new BehaviorSubject<string | null>(this.getCookie('auth_token'));
+  auth_token$ = this.auth_tokenSubject.asObservable();
+  user: any = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // ✅ تحميل التوكن عند بدء التطبيق
-  initializeAuthToken(): void {
-    const token = localStorage.getItem('authToken');
+  // ✅ دوال التعامل مع الكوكيز
+  private setCookie(name: string, value: string, days: number): void {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+  }
+
+  private getCookie(name: string): string | null {
+    const cookie = document.cookie.split('; ').find(item => item.startsWith(`${name}=`));
+    return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+  }
+
+  private deleteCookie(name: string): void {
+    this.setCookie(name, '', -1);
+  }
+
+  // ✅ تحميل التوكن عند بدء التطبيق من الكوكيز
+  initializeauth_token(): void {
+    const token = this.getCookie('auth_token');
     if (token) {
-      this.authTokenSubject.next(token);
+      this.auth_tokenSubject.next(token);
     }
   }
 
   // ✅ تسجيل مستخدم جديد
-  signup(firstName: string, lastName: string, username: string, email: string, password: string): Observable<any> {
+  signup(firstName: any, lastName: any, username: any, email: any, password: any): Observable<any> {
     const userData = { firstName, lastName, username, email, password };
     return this.http.post(`${this.apiUrl}/signup`, userData, { withCredentials: true }).pipe(
       tap((response: any) => {
-        this.user=response.user
-        if (response.token) {
-          this.setAuthToken(response.token);
-        }
+        this.user = response.user;
       }),
       catchError((error) => {
         return throwError(() => new Error(error.error.message || 'فشل في التسجيل'));
@@ -45,8 +57,8 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, { email, password }, { withCredentials: true }).pipe(
       tap((response: any) => {
         if (response.token) {
-          this.setAuthToken(response.token);
-          this.user = response.user; // حفظ بيانات المستخدم بعد تسجيل الدخول
+          this.setauth_token(response.token);
+          this.user = response.user;
         }
       }),
       catchError((error) => {
@@ -71,9 +83,8 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       map((response: any) => {
-        this.authTokenSubject.next(null);
-        localStorage.removeItem('authToken');
-        sessionStorage.removeItem('authToken');
+        this.auth_tokenSubject.next(null);
+        this.deleteCookie('auth_token');
         this.router.navigate(['/logIn']);
         return response;
       }),
@@ -83,28 +94,27 @@ export class AuthService {
       })
     );
   }
-  
 
-  // ✅ تحديث التوكن
-  private setAuthToken(token: string | null): void {
-    this.authTokenSubject.next(token);
+  // ✅ تحديث التوكن في الكوكيز
+  private setauth_token(token: string | null): void {
+    this.auth_tokenSubject.next(token);
     if (token) {
-      localStorage.setItem('authToken', token);
+      this.setCookie('auth_token', token, 7); // صلاحية 7 أيام
     } else {
-      localStorage.removeItem('authToken');
+      this.deleteCookie('auth_token');
     }
   }
 
   // ✅ حذف التوكن عند تسجيل الخروج
-  private clearAuthToken(): void {
-    this.authTokenSubject.next(null);
+  private clearauth_token(): void {
+    this.auth_tokenSubject.next(null);
     this.user = null;
-    localStorage.removeItem('authToken');
+    this.deleteCookie('auth_token');
   }
 
   // ✅ التحقق من حالة تسجيل الدخول
   isAuthenticated(): boolean {
-    this.islogIn =true
-    return !!this.authTokenSubject.value;
+    this.islogIn = true;
+    return !!this.auth_tokenSubject.value;
   }
 }

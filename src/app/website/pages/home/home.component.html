@@ -8,12 +8,12 @@
                 <div class="col-12">
 
                     <h3 class=" text-white playfair-display italic pt-5 pb-3 pe-auto ">
-                        <span role="button" [routerLink]="['category',category.title]">
+                        <span role="button" [routerLink]="[category.title]">
                             {{ category.title }}
                         </span>
                     </h3>
                 </div>
-                <app-create-cards [arraymovies]="category.movies " [category]="category.title"  ></app-create-cards>
+                <app-create-cards [arraymovies]="category.movies " [category]="category.title" ></app-create-cards>
             
             </div>
         </div>

@@ -1,7 +1,7 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
 </ngx-spinner>
-<app-nav></app-nav>
+<app-nav *ngIf="!isDashboardRoute()"></app-nav>
 <router-outlet />
 <app-footer></app-footer>
 

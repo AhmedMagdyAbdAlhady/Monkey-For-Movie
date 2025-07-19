@@ -33,12 +33,13 @@ export class CategoryPageComponent {
       }
       this.spinner.show()
       this.getdata.getSpecialCategory(categoryName).subscribe((res) => {
+        console.log(res)
         if (!res || res.length === 0) {
           this.router.navigate(['/']);
         } else {
-          this.title =res[0].title
-          this.sliderHeader = res[0].movies;
-          this.arrayMovies = res[0].movies;
+          this.title =res.collectionName
+          this.sliderHeader = res;
+          this.arrayMovies = res;
         }
       }, (error) => {
         console.error(error)

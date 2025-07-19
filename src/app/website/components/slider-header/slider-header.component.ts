@@ -51,7 +51,7 @@ export class SliderHeaderComponent {
           swiper: swipermain,
         },
       });
-    }, 200); // Small delay to ensure DOM is ready
+    }, 5000); // Small delay to ensure DOM is ready
   }
   ngAfterViewInit(): void {
     this.swiperfunction()

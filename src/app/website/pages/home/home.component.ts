@@ -22,23 +22,33 @@ export class HomeComponent {
   filmCards: Movie[] = []
   categories: any[] = [];
   constructor(private apiService: ApiHomeService,private spinner: NgxSpinnerService) { }
-
+ 
 
   createsliderimage(items: any, type: string) {
-    items.forEach((item: any) => {
-      if (item.title == type) {
-        this.sliderHeader = item.movies
+    // items.forEach((item: any) => {
+      // if (item.key == type) {
+      //   this.sliderHeader = item.movies
+      // }
+    // });
+    // change  old database to new data from backend
+   for (const property in items) {
+    console.log(property)
+      if (property == type) {
+        this.sliderHeader = items[property]
       }
-    });
+    
   }
-  createfilmCards() {
+ 
+  }
 
-  }
+
+
+  
   ngOnInit() {
+    
     this.spinner.show()
     this.apiService.getMovies().subscribe(
       response => {
-
         this.movies = response;
       },
       error => {
@@ -58,5 +68,5 @@ export class HomeComponent {
       }
     );
   }
-
+  
 }

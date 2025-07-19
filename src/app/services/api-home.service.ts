@@ -7,20 +7,64 @@ import { map, Observable } from 'rxjs';
 })
 export class ApiHomeService {
 
-  apiurl = "./api.json"
-  
-  constructor(private http: HttpClient) {}
-  getMovies(): Observable<any> {
-    return this.http.get(this.apiurl)
-  }
+  apiurl = "http://localhost:3000"
+
+  constructor(private http: HttpClient) { }
+  // getMovies(): Observable<any> {
+  //   return this.http.get(this.apiurl)
+  // }
+  // getLast10MoviesFromEachCategory(): Observable<any[]> {
+  //   return this.http.get<any[]>(this.apiurl).pipe(
+  //     map(categories =>
+  //       categories.map(category => {
+  //         console.log(category)
+  //         // return {
+  //         //   title: category.collectionName,
+  //         //   movies: category.movies.slice(-12)
+  //         // }
+  //       })
+  //     )
+  //   );
+  // }
+ getMovies(): Observable<any> {
+  return this.http.get<any[]>(this.apiurl).pipe(
+    map(moviesArray => {
+      const grouped = moviesArray.reduce((acc, movie) => {
+        const key = movie.collectionName || 'Uncategorized';
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(movie);
+        return acc;
+      }, {} as { [key: string]: any[] });
+      return grouped;
+    })
+  );
+}
+
+
   getLast10MoviesFromEachCategory(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiurl).pipe(
-      map(categories => 
-        categories.map(category => ({
-          title: category.title, 
-          movies: category.movies.slice(-12) 
-        }))
-      )
-    );
-  }
+  return this.http.get<any[]>(this.apiurl).pipe(
+    map(moviesArray => {
+      const grouped = moviesArray.reduce((acc, movie) => {
+        const key = movie.collectionName || 'Uncategorized';
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(movie);
+        return acc;
+      }, {} as { [key: string]: any[] });
+
+      // رجع مصفوفة تحتوي على آخر 12 فيلم في كل مجموعة
+     return Object.entries(grouped).map(([title, movies]) => {
+        const moviesList = movies as any[]; // ✅ الحل هنا
+        return {
+          title,
+          movies: moviesList.slice(-12)
+        };
+      });
+    })
+  );
+}
+
 }

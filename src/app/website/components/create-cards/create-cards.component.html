@@ -5,7 +5,7 @@
         <div class="overflow-hidden" >
     
             <div class="card text-bg-dark col-12">
-                <img [src]="card.poster_path" class="card-img" alt="image">
+                <img [src]="card.poster_path" class="card-img" alt="image" loading="lazy">
                 <div class="card-img-overlay  top-50 start-50 translate-middle" >
                     <app-go-single-page *ngIf="card?._id" [id]="card?._id" [category]="category"></app-go-single-page>
     

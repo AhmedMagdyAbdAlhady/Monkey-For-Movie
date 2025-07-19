@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../../srever/auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 import {  Router } from '@angular/router';
 
 @Component({
@@ -14,7 +16,7 @@ export class SingupComponent {
   signupForm:any
   isSubmitted = false;
 logInControl: any;
-  constructor(private authService: AuthService , private Router:Router) {
+  constructor(private authService: AuthService , private Router:Router,private toastr: ToastrService) {
     this.createForm();
   }
   // Custom validator for password match
@@ -60,6 +62,7 @@ logInControl: any;
   }
 
   onSubmit() {
+    debugger
     
     this.isSubmitted = true;
 
@@ -75,11 +78,18 @@ logInControl: any;
       // console.log(userData);
         this.authService.signup(userData.firstName, userData.lastName, userData.username, userData.email, userData.password)
           .subscribe(
-             (msg) => console.log(msg),
+             (msg) => {
+              this.toastr.success(msg.message);
+              this.authService.user =msg.user
+              console.log(msg)}
+             ,
              (err) => console.error(err.message),
-             ()=>{this.Router.navigate(['/'])}
+             ()=>{
+              
+              this.Router.navigate(['/'])
+            }
           );
-      
+      console.log(this.authService.user)
       
     }
   }
