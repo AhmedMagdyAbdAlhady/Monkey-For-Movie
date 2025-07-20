@@ -1,0 +1,45 @@
+<div *ngIf="showMovie" class="bg-dark py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-white playfair-display text-center italic mb-5">
+          {{ showMovie.movie?.title }}
+        </h2>
+        <div class="d-flex justify-content-center m-5">
+          <iframe
+          
+            class="border border-white rounded-5 col-12 col-lg-6"
+            
+            height="500"
+            [src]="safeUrl"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <div class="col-12">
+        <ng-container *ngFor="let i of showMovie.movie?.genres">
+          <span class="bg-warning px-3 me-2 py-1 rounded-4 italic">{{
+            i
+          }}</span>
+        </ng-container>
+        <p class="text-white playfair-display fs-5 my-3">
+          {{ showMovie.movie?.overview }}
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-white playfair-display italic mt-5 mb-3">
+          Watch other shows
+        </h2>
+        <app-create-cards
+          *ngIf="showMovie.related"
+          [arraymovies]="showMovie.related"
+          [category]="category"
+        ></app-create-cards>
+      </div>
+    </div>
+  </div>
+</div>

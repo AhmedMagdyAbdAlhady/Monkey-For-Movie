@@ -32,7 +32,6 @@ export class HomeComponent {
     // });
     // change  old database to new data from backend
    for (const property in items) {
-    console.log(property)
       if (property == type) {
         this.sliderHeader = items[property]
       }

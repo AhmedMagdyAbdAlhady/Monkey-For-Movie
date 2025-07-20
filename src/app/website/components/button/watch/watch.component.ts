@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-watch',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './watch.component.css'
 })
 export class WatchComponent {
-
+  @Input()id: any;
 }

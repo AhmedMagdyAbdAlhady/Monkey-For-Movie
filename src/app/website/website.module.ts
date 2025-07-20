@@ -19,6 +19,7 @@ import { WatchComponent } from './components/button/watch/watch.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SingupComponent } from './pages/singup/singup.component';
+import { WatchingComponent } from './pages/watching/watching.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SingupComponent } from './pages/singup/singup.component';
     WatchComponent,
     LogInComponent,
     SingupComponent,
+    WatchingComponent,
   ],
   imports: [
     CommonModule,
