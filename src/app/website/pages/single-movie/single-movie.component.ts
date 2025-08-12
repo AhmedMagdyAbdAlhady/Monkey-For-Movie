@@ -33,7 +33,7 @@ id: any;
       this.spinner.show()
       this.getdata.getMovieById(this.id).subscribe((res) => {
         if (!res) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/not-found']);
         } else {
           this.showMovie = res
         }

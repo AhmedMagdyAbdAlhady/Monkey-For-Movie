@@ -28,14 +28,14 @@ export class CategoryPageComponent {
       const categoryName = params.get("categoryName");
       this.category =categoryName;
       if (!categoryName) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/not-found']);
         return;
       }
       this.spinner.show()
       this.getdata.getSpecialCategory(categoryName).subscribe((res) => {
         console.log(res)
         if (!res || res.length === 0) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/not-found']);
         } else {
           this.title =res.collectionName
           this.sliderHeader = res;

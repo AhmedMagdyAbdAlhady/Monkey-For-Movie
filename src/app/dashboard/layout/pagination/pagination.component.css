@@ -1,0 +1,60 @@
+
+
+.table thead th {
+  background: #2d4263;
+  color: #ffffff;
+  font-weight: 600;
+}
+.table tbody tr td {
+  vertical-align: middle;
+}
+
+.pagination {
+  margin: 0;
+}
+.pagination .page-link {
+  z-index: 1;
+  background: transparent;
+  color: #efe8e6;
+}
+.pagination .page-link:hover {
+  background: rgb(255, 255, 255);
+  color: black;
+  border: #000000;
+}
+
+.morph-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  height: 1px;
+  width: 1px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  transform-origin: left top;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: rgba(230, 99, 55, 0.2);
+}
+.morph-bg.visible {
+  opacity: 1;
+}
+.morph-bg.has-transition {
+  transition: 0.3s;
+  will-change: transform, border-radius, height, width;
+}
+.active {
+  background-color: rgb(255, 255, 255);  
+
+  & button{
+     color: #000000 !important;
+     font-weight: bold;
+     border: none ;
+     box-shadow: none;
+     text-shadow: -1px 3px 6px black;;
+  }
+
+}

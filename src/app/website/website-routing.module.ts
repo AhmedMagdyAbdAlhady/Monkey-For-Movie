@@ -10,19 +10,27 @@ import { SingupComponent } from './pages/singup/singup.component';
 import { canDeactivateGuard } from './guards/can-deactivate.guard';
 import { WatchingComponent } from './pages/watching/watching.component';
 
-const routes: Routes = [{ path: '', component: WebsiteComponent , children:[
-  { path: '', component: HomeComponent},
-  { path: 'watching/:id', component: WatchingComponent},
-  { path: 'logIn', component: LogInComponent, canDeactivate:[canDeactivateGuard]},
-  { path: 'singup', component: SingupComponent, canDeactivate:[canDeactivateGuard]},
-  { path: ':category/:id', component: SingleMovieComponent},
-  { path: ':categoryName', component: CategoryPageComponent},
-  { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: '**', component:ErrorComponent },
-]}];
+const routes: Routes = [
+  {
+    path: '',
+    component: WebsiteComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'watching/:id', component: WatchingComponent },
+      { path: 'logIn', component: LogInComponent, canDeactivate: [canDeactivateGuard] },
+      { path: 'singup', component: SingupComponent, canDeactivate: [canDeactivateGuard] },
+      { path: 'not-found', component: ErrorComponent },
+      { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: ':category/:id', component: SingleMovieComponent },
+      { path: ':categoryName', component: CategoryPageComponent },
+      {path:'**', redirectTo: "not-found"}
+    ]
+  }
+];
+
 
 @NgModule({
-  imports: [RouterModule.forChild(routes )],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class WebsiteRoutingModule { }

@@ -1,0 +1,38 @@
+/*======================
+    404 page
+=======================*/
+
+.page_404 {
+  background: #212529;
+  font-family: "Arvo", serif;
+}
+
+.page_404 img {
+    top:-10% 
+}
+
+.four_zero_four_bg {
+  /* background-image: url(https://miro.medium.com/v2/resize:fit:1400/0*VMeYq1x7s1ObI0Sq.gif); */
+  width: 100%;
+  height: 60vh;
+  background-position: center;
+}
+
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
+
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 a {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+}
+.contant_box_404 {
+  margin-top: -50px;
+}

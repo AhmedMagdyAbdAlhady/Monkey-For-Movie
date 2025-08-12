@@ -37,12 +37,17 @@ export class WatchingComponent {
       this.getdata.getMovieById(this.id).subscribe((res) => {
         
         if (!res) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/not-found']);
         } else {
           this.showMovie = res
         }
-        const url = `${this.showMovie.movie.watchingTrailer}`;
-        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        if(this.showMovie.movie.watchingTrailer){
+          const url = `${this.showMovie.movie.watchingTrailer}`;
+          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        }else{
+          this.safeUrl="not found"
+        }
+        
       }, (error) => {
         console.error(error)
       }, () => {

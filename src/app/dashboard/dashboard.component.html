@@ -1,2 +1,12 @@
-<router-outlet />
-<h1 class="text-white">hallo</h1>
+<button class="toggle-btn collapsed" (click)="toggleSidebar()">
+  <i class="fas fa-chevron-left"></i>
+</button>
+<div class="d-flex dashbord">
+  <div>
+    <app-sidebar style="position: sticky; top: 0px" class=""></app-sidebar>
+  </div>
+  <div class="contentDashbord collapsed">
+    <app-header style="position: sticky; top: 0" class=""  (search)="onNavSearch($event)"> </app-header>
+    <router-outlet  />
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<!-- <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li *ngFor="let page of countPage" class="page-item" [id]="page"><a class="page-link" [routerLink]="[page]">{{page}}</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav> -->
+<nav class="mb-5" *ngIf="countPage.length" aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+
+    <!-- Previous Button -->
+    <li class="page-item" [class.disabled]="activePage === 1" >
+      <button class="page-link" (click)="goToPrevious()">«</button>
+    </li>
+
+    <!-- Numbered Pages with "..." -->
+    <li
+      *ngFor="let page of visiblePages"
+      class="page-item"
+      [class.active]="page === activePage"
+      [class.disabled]="page < 0"
+    >
+      <button
+        class="page-link"
+        *ngIf="page > 0"
+        (click)="setActivePage(page)"
+      >
+        {{ page }}
+      </button>
+      <span *ngIf="page < 0" class="page-link">...</span>
+    </li>
+
+    <!-- Next Button -->
+    <li class="page-item " [class.disabled]="activePage === countPage.length">
+      <button class="page-link" (click)="goToNext()"> »</button>
+    </li>
+
+  </ul>
+</nav>
+
+

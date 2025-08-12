@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="movies">
+    <div class="container-fluid mt-4">
+  <h2 class="mb-3 text-white text-center">List of movies </h2>
+
+  <table class="table table-bordered table-hover text-center">
+    <thead class="table-dark ">
+      <tr>
+        <th style="width: 2%;">#</th>
+        <th style="width: 10%;">poster</th>
+        <th style="width: 20%;">Name</th>
+        <th style="width: 35%;">Description</th>
+        <th style="width: 15%;">category</th>
+        <th style="width: 20%;">process</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <img style="width: 40px;" [src]="item.poster_path " [alt]="item.title ">
+        </td>
+        <td>{{ item.title }}</td>
+        <td ><div class="description">
+          {{ item.overview }}
+        </div></td>
+        <td>{{ item.collectionName }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editItem(item)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteItem(item._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  </div>
+  <div>
+<app-pagination
+  [numberOfPage]="totalPages"
+  [searchQuery]="currentQuery"
+  (pageChange)="loadPage($event, currentQuery)">
+</app-pagination>
+  </div>
+</div>
+  

@@ -3,5 +3,5 @@
 </ngx-spinner>
 <app-nav *ngIf="!isDashboardRoute()"></app-nav>
 <router-outlet />
-<app-footer></app-footer>
+<app-footer *ngIf="!isDashboardRoute()"></app-footer>
 

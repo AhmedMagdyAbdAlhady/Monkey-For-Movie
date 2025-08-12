@@ -1,0 +1,207 @@
+<div class="container mt-4">
+  <form class="row" (ngSubmit)="submit()" #movieForm="ngForm">
+    <div class="mb-3 col-6">
+      <label for="title" class="form-label text-white">title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        [(ngModel)]="movie.title"
+      />
+    </div>
+    <div class="mb-3 col-6">
+      <label for="collectionName" class="form-label text-white">
+        collection Name</label
+      >
+      <input
+        type="text"
+        name="collectionName"
+        class="form-control"
+        id="collectionName"
+        [(ngModel)]="movie.collectionName"
+      />
+    </div>
+    <div class="mb-3 col-12">
+      <label for="overview" class="form-label text-white">Description</label>
+      <textarea
+        type="text"
+        rows="5"
+        class="form-control"
+        id="overview"
+        name="overview"
+        [(ngModel)]="movie.overview"
+      >
+      </textarea>
+    </div>
+    <div class="row align-items-stretch my-3">
+      <div class="col-12 col-lg-3 d-flex justify-content-center">
+        <div class="col-12">
+          <label for="image-poster" class="form-label text-white">Poster</label>
+          <p *ngIf="!previewImage" class="text-white fs-2 mb-4">
+            image is not found
+          </p>
+
+          <img
+            *ngIf="previewImage"
+            [src]="previewImage"
+            class="col-12"
+            [alt]="movie.title"
+          />
+          <div class="input-group d-flex align-items-center">
+            <input
+              type="text"
+              rows="3"
+              class="form-control"
+              [(ngModel)]="urlImage"
+              placeholder="change image "
+              name="imageUrl"
+              class="form-control"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="updateImage()"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-9 d-flex justify-content-center">
+        <div class="col-12 col-md-12 overflow-hidden">
+          <label for="TrailerVideo" class="form-label text-white col-12"
+            >Trailer Video</label
+          >
+          <p *ngIf="!previewTrailer" class="text-white fs-1">
+            video is not found
+          </p>
+          <iframe
+            *ngIf="previewTrailer"
+            class="col-12"
+            width=""
+            height="445px"
+            [src]="previewTrailer"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+
+          <div class="input-group d-flex align-items-center">
+            <input
+              type="text"
+              class=""
+              class="form-control"
+              [(ngModel)]="urlTrailer"
+              placeholder="change Trailer "
+              name="TrailerUrl"
+              class="form-control"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="updateTrailer()"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+          <label for="image-poster" class="form-label text-white">Background Image</label>
+          <p *ngIf="!previewBackgroundImage" class="text-white fs-2 mb-4">
+            image is not found
+          </p>
+
+          <img *ngIf="previewBackgroundImage" [src]="previewBackgroundImage" class="col-12" [alt]="movie.backdrop_path" />
+          <div class="input-group d-flex align-items-center">
+            <input
+              type="text"
+              rows="3"
+              class="form-control"
+              [(ngModel)]="urlBackgroundImage"
+              placeholder="change image "
+              name="urlBackgroundImage"
+              class="form-control"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="updateBackgroundImage()"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+    <div class="mb-3 col-12 col-md-6 row align-self-start genres">
+      <label for="genres" class="form-label text-white col-12"> genres</label>
+      <div
+        *ngFor="let genre of genres; let i = index; trackBy: trackByIndex"
+        class="col-6 col-md-12"
+      >
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Genre"
+            [name]="genres[i]"
+            [(ngModel)]="genres[i]"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="
+              genres.length - 1 === i || genres.length == 1
+                ? handelGennresInpout()
+                : removeGenre(i)
+            "
+          >
+            {{ genres.length - 1 === i || genres.length == 1 ? "+" : "-" }}
+          </button>
+          <button
+            *ngIf="genres.length - 1 == i && genres.length > 1"
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="removeGenre(i)"
+          >
+            -
+          </button>
+        </div>
+      </div>
+    </div>
+     <div class="mb-3 col-12 col-md-6">
+      <label for="original_title" class="form-label text-white">
+        original title</label
+      >
+      <input
+        type="text"
+        name="original_title"
+        class="form-control"
+        id="original_title"
+        [(ngModel)]="movie.original_title"
+      />
+    </div>
+     <div class="mb-3 col-12 col-md-6">
+      <label for="release_date" class="form-label text-white">
+        movie date</label
+      >
+      <input
+        type="date"
+        name="orelease_date"
+        class="form-control"
+        id="release_date"
+        [(ngModel)]="movie.release_date"
+      />
+    </div>
+
+    <div class="col-12 text-end mt-3">
+      <button type="submit" class="btn btn-success" type="submit">
+        Save
+      </button>
+    </div>
+  </form>
+</div>

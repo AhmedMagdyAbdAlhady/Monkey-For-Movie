@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
@@ -26,6 +26,14 @@ export class ApiHomeService {
   //     )
   //   );
   // }
+getItemsOfMovies(page:any, searchItems?: string):Observable<any>{
+  let params = new HttpParams();
+    if (searchItems) {
+      params = params.append('searchItems', searchItems);
+    }
+    
+    return this.http.get<any[]>(`${this.apiurl}/NumberOFPage=${page}`,{params})
+}
  getMovies(): Observable<any> {
   return this.http.get<any[]>(this.apiurl).pipe(
     map(moviesArray => {

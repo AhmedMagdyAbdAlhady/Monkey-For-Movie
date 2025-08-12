@@ -9,13 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { provideCharts, withDefaultRegisterables, BaseChartDirective } from 'ng2-charts';
+
+
 // Import function to register Swiper custom elements
 import { register } from 'swiper/element/bundle';
 import { AuthInterceptor } from './website/srever/interceptor/auth.interceptor';
 register();
 @NgModule({
   declarations: [
-    AppComponent,    
+    AppComponent,
   ],
   imports: [
     HttpClientModule,
@@ -23,10 +26,11 @@ register();
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
-    
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideCharts(withDefaultRegisterables())
   ],
   bootstrap: [AppComponent]
 })
