@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './../../srever/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -28,24 +29,23 @@ navItems=[
     url:"Famility-Time"
   }
 ]
-constructor(public authService:AuthService, private router: Router){}
+constructor(public authService:AuthService, private router: Router,private toaster:ToastrService){}
 logout(): void {
-  this.authService.user = null;
-  this.router.navigate(['/login'])
-  // this.authService.logout().subscribe(
-  //   () => {
-  //     this.router.navigate(['/logIn']);
-  //     // this.authService.islogIn= true
-      
-  //     // console.log('✅ تسجيل الخروج بنجاح',this.authService.islogIn);
-  //   },
-  //   (error) => {
-  //     alert(error.message); 
-  //   },()=>{
-  // console.log(this.authService.isAuthenticated())
-  // // console.log(this.authService.user)
-  //   }
-  // );
+  this.authService.user = "";
+  this.router.navigate(['/logIn'])
+  this.authService.logout().subscribe(
+    (res) => {
+this.toaster.success(res.message)
+      // this.authService.islogIn= true
+      // console.log('✅ تسجيل الخروج بنجاح',this.authService.islogIn);
+    },
+    (error) => {
+      console.log(error.message); 
+    },()=>{
+  console.log(this.authService.isAuthenticated())
+  // console.log(this.authService.user)
+    }
+  );
 }
 
 ngOnInit(){

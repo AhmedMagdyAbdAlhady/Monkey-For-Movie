@@ -23,7 +23,6 @@ export class PaginationComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['numberOfPage']) {
       this.getPages();
-      console.log(this.numberOfPage)
     }
   }
 

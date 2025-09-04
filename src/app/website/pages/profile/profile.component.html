@@ -1,0 +1,171 @@
+<section class="container">
+  <h1 class="text-white">Profile</h1>
+
+  <div class="text-white" *ngIf="loading">Loading...</div>
+  <div class="text-white" *ngIf="error">{{ error }}</div>
+
+  <div
+    class="profile-card col-12 col-lg-5 bg-white p-4 rounded position-relative"
+    *ngIf="!loading && user"
+  >
+  <a class="link-underline-light position-absolute top-0 start-0 p-2 text-success fs-5 fw-bolder  " routerLink="/history">history</a>
+    <!-- Avatar -->
+    <section class="row justify-content-center">
+      <div
+      class="d-flex justify-content-center col-5  mb-4 position-relative"
+      
+    >
+      <div class="position-relative">
+        <!-- صورة البروفايل -->
+        <img
+          *ngIf="avatarPreview; else noAvatar"
+          [src]="avatarPreview"
+          class="rounded-circle border"
+          alt="Avatar"
+          width="200"
+          height="200"
+        />
+        <ng-template #noAvatar>
+          <img
+            src="/assets/default-avatar.png"
+            alt="Default Avatar"
+            class="rounded-circle border"
+            width="120"
+            height="120"
+          />
+        </ng-template>
+
+        <!-- زر القلم -->
+        <button
+          type="button"
+          class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle openEditImage"
+          (click)="triggerFileInput(fileInput)"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>
+
+      <!-- input hidden -->
+      <input
+        type="file"
+        #fileInput
+        accept="image/*"
+        (change)="onFileChange($event)"
+        hidden
+      />
+
+      <!-- أزرار Save/Cancel -->
+      <div *ngIf="iconEdit">
+        <button
+          class="btn btn-success btn-sm position-absolute saveEditImage"
+          (click)="saveImage()"
+        >
+          <i class="fa-solid fa-download"></i>
+        </button>
+        <button
+          class="btn btn-danger btn-sm position-absolute cancelEditImage"
+          (click)="cancelImageEditing()"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    </section>
+    
+
+    <!-- userName -->
+    <p class="position-relative mb-4 fs-5">
+      <ng-container *ngIf="editingField !== 'userName'; else edituserName">
+        userName: {{ user.userName }}
+        <span
+          type="button"
+          class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+          (click)="startEditing('userName', user.userName)"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </span>
+      </ng-container>
+      <ng-template #edituserName>
+        <input [(ngModel)]="editedValue" class="form-control" />
+        <button class="btn btn-success btn-sm mt-1" (click)="saveField()">
+          Save
+        </button>
+        <button class="btn btn-danger btn-sm mt-1" (click)="cancelEditing()">
+          Cancel
+        </button>
+      </ng-template>
+    </p>
+
+    <!-- First Name -->
+    <p class="position-relative mb-4 fs-5">
+      <ng-container *ngIf="editingField !== 'firstName'; else editFirstName">
+        First name: {{ user.firstName }}
+        <span
+          type="button"
+          class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+          (click)="startEditing('firstName', user.firstName)"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </span>
+      </ng-container>
+      <ng-template #editFirstName>
+        <input [(ngModel)]="editedValue" class="form-control" />
+        <button class="btn btn-success btn-sm mt-1" (click)="saveField()">
+          Save
+        </button>
+        <button class="btn btn-danger btn-sm mt-1" (click)="cancelEditing()">
+          Cancel
+        </button>
+      </ng-template>
+    </p>
+
+    <!-- Last Name -->
+    <p class="position-relative mb-4 fs-5">
+      <ng-container *ngIf="editingField !== 'lastName'; else editLastName">
+        Last name: {{ user.lastName }}
+        <span
+          type="button"
+          class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+          (click)="startEditing('lastName', user.lastName)"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </span>
+      </ng-container>
+      <ng-template #editLastName>
+        <input [(ngModel)]="editedValue" class="form-control" />
+        <button class="btn btn-success btn-sm mt-1" (click)="saveField()">
+          Save
+        </button>
+        <button class="btn btn-danger btn-sm mt-1" (click)="cancelEditing()">
+          Cancel
+        </button>
+      </ng-template>
+    </p>
+
+    <!-- Email -->
+    <p class="position-relative mb-4 fs-5">
+      <ng-container *ngIf="editingField !== 'email'; else editEmail">
+        Email: {{ user.email }}
+        <span
+          type="button"
+          class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+          (click)="startEditing('email', user.email)"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </span>
+      </ng-container>
+      <ng-template #editEmail>
+        <input [(ngModel)]="editedValue" class="form-control" />
+        <button class="btn btn-success btn-sm mt-1" (click)="saveField()">
+          Save
+        </button>
+        <button class="btn btn-danger btn-sm mt-1" (click)="cancelEditing()">
+          Cancel
+        </button>
+      </ng-template>
+    </p>
+
+    <!-- Joined -->
+    <p class="fs-6">Joined: {{ user.createdAt | date : "medium" }}</p>
+  </div>
+</section>

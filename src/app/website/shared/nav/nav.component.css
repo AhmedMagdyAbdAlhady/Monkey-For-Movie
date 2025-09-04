@@ -1,0 +1,10 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+.maxcharacter {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    max-width: 65px; /* Sets a maximum width for the span */
+    display: inline-block; /* Allows setting width and other block-level properties */
+  }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './website/srever/auth.service';
+import { DashbordServiceService } from './services/dashbord/dashbord-service.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    
     // ✅ تحميل التوكن من الكوكيز
     this.authService.initializeauth_token();
 

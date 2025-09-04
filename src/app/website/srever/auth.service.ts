@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   islogIn: boolean = false;
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl ="https://movies-back-end-eta.vercel.app";
   auth_tokenSubject = new BehaviorSubject<string | null>(this.getCookie('auth_token'));
   auth_token$ = this.auth_tokenSubject.asObservable();
   user: any = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   // ✅ دوال التعامل مع الكوكيز
   private setCookie(name: string, value: string, days: number): void {
@@ -40,25 +40,48 @@ export class AuthService {
   }
 
   // ✅ تسجيل مستخدم جديد
-  signup(firstName: any, lastName: any, username: any, email: any, password: any): Observable<any> {
-    const userData = { firstName, lastName, username, email, password };
-    return this.http.post(`${this.apiUrl}/signup`, userData, { withCredentials: true }).pipe(
+  // signup(firstName: any, lastName: any, username: any, email: any, password: any): Observable<any> {
+  //   const userData = { firstName, lastName, username, email, password };
+  // return this.http.post(`${this.apiUrl}/signup`, userData, { withCredentials: true }).pipe(
+  //   tap((response: any) => {
+  //     this.user = response.user;
+  //   }),
+  //   catchError((error) => {
+  //     return throwError(() => new Error(error.error.message || 'فشل في التسجيل'));
+  //   })
+  // );
+  // }
+  signup(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/user/add`, formData, { withCredentials: true }).pipe(
       tap((response: any) => {
-        this.user = response.user;
+        this.user = response.userDetails;
       }),
       catchError((error) => {
         return throwError(() => new Error(error.error.message || 'فشل في التسجيل'));
       })
-    );
+    );;
   }
-
+  
+  getProfile(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user/profile`, { withCredentials: true });
+  }
+  editUser(formData: FormData,id:any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/user/${id}`, formData, { withCredentials: true }).pipe(
+      tap((response: any) => {
+        this.user = response.userDetails;
+      }),
+      catchError((error) => {
+        return throwError(() => new Error(error.error.message || 'فشل في التسجيل'));
+      })
+    );;
+    }
   // ✅ تسجيل الدخول
   login(email: any, password: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password }, { withCredentials: true }).pipe(
+    return this.http.post(`${this.apiUrl}/user/login`, { email, password }, { withCredentials: true }).pipe(
       tap((response: any) => {
-        if (response.token) {
-          this.setauth_token(response.token);
-          this.user = response.user;
+        if (response.userDetails) {
+          // this.setauth_token(response.token);
+          this.user = response.userDetails;
         }
       }),
       catchError((error) => {
@@ -74,14 +97,23 @@ export class AuthService {
         this.user = response;
       }),
       catchError((error) => {
-        return throwError(() => new Error(error.error.message || 'فشل في جلب بيانات المستخدم'));
+        return throwError(() => new Error(error.error.message || 'same thing error'));
       })
     );
   }
-
+addMovietoUSer(id:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/user/watch/${this.user._id}/${id}`,{}, { withCredentials: true });
+  
+}
+getmoviesUser(): Observable<any>{
+  return this.http.get<any>(`${this.apiUrl}/user/${this.user._id}/movies`, { withCredentials: true });
+}
+deletemoviesUser(id:any): Observable<any>{
+  return this.http.delete<any>(`${this.apiUrl}/user/unwatch/${this.user._id}/${id}`, { withCredentials: true });
+}
   // ✅ تسجيل الخروج
   logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
+    return this.http.post(`${this.apiUrl}/user/logout`, {}, { withCredentials: true }).pipe(
       map((response: any) => {
         this.auth_tokenSubject.next(null);
         this.deleteCookie('auth_token');

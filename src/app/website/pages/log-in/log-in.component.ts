@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../srever/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-log-in',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './log-in.component.css'
 })
 export class LogInComponent {
-  constructor(private authService: AuthService, private Router: Router) { }
+  constructor(private authService: AuthService, private Router: Router, private toastr: ToastrService) { }
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required, Validators.minLength(10)]),
     password: new FormControl(null, [Validators.required])
@@ -28,17 +29,14 @@ export class LogInComponent {
         password: this.formControls.password.value
       };
       this.authService.login(userData.email, userData.password).subscribe(
-        (msg) =>{
-          this.authService.user=msg.user
-          this.authService.islogIn = true
-        //  console.log(msg.user) 
+        (msg) => {
+          this.toastr.success(msg.message);
         },
-        (err) => console.error(err.message),
+        (err) => {
+          this.toastr.warning(err.message);},
         () => {
           this.authService.islogIn = true
           this.Router.navigate(['/'])
-          console.log(this.authService.isAuthenticated())
-          console.log(this.authService.user)
         }
       );
     }

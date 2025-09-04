@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../../srever/auth.service';
+import { CanComponentDeactivate } from '../../guards/can-component-deactivate';
+
 import { ToastrService } from 'ngx-toastr';
 
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singup',
@@ -12,11 +14,14 @@ import {  Router } from '@angular/router';
   styleUrl: './singup.component.css'
 })
 
-export class SingupComponent {
-  signupForm:any
+export class SingupComponent implements CanComponentDeactivate{
+  avatar: File | null = null;
+  avatarPreview: string | ArrayBuffer | null = null;
+
+  signupForm: any
   isSubmitted = false;
-logInControl: any;
-  constructor(private authService: AuthService , private Router:Router,private toastr: ToastrService) {
+  logInControl: any;
+  constructor(private authService: AuthService, private Router: Router, private toastr: ToastrService) {
     this.createForm();
   }
   // Custom validator for password match
@@ -61,38 +66,56 @@ logInControl: any;
     return this.signupForm.controls;
   }
 
-  onSubmit() {
-    debugger
-    
-    this.isSubmitted = true;
-
-    if (this.signupForm.valid) {
-      const userData = {
-
-        firstName: this.formControls.firstName.value,
-        lastName: this.formControls.lastName.value,
-        username: this.formControls.username.value,
-        email: this.formControls.email.value,
-        password: this.formControls.password.value
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.avatar = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.avatarPreview = reader.result;
       };
-      // console.log(userData);
-        this.authService.signup(userData.firstName, userData.lastName, userData.username, userData.email, userData.password)
-          .subscribe(
-             (msg) => {
-              this.toastr.success(msg.message);
-              this.authService.user =msg.user
-              console.log(msg)}
-             ,
-             (err) => console.error(err.message),
-             ()=>{
-              
-              this.Router.navigate(['/'])
-            }
-          );
-      console.log(this.authService.user)
-      
+      reader.readAsDataURL(file);
     }
   }
 
+  // ✅ فتح input بتاع الصورة عند الضغط على ✏️
+  triggerFileInput(fileInput: HTMLInputElement) {
+    fileInput.click();
+  }
+  onSubmit() {
+  this.isSubmitted = true;
+
+  if (this.signupForm.valid) {
+    const formData = new FormData();
+    formData.append("firstName", this.signupForm.get("firstName")?.value);
+    formData.append("lastName", this.signupForm.get("lastName")?.value);
+    formData.append("userName", this.signupForm.get("username")?.value);
+    formData.append("email", this.signupForm.get("email")?.value);
+    formData.append("password", this.signupForm.get("password")?.value);
+
+    if (this.avatar) {
+      formData.append("avatar", this.avatar);
+    }
+
+    this.authService.signup(formData).subscribe(
+      (res) => {
+        console.log(res)
+        this.toastr.success(res.message);
+        this.Router.navigate(['/']);
+      },
+      (err) => this.toastr.warning(err.error.message)
+      );
+    
+  }
+}
+
+
+
+  canDeactivate(): boolean {
+    if (this.signupForm.dirty && !this.isSubmitted) {
+      return confirm("Are you sure you want to leave without saving?");
+    }
+    return true;
+  }
 
 }

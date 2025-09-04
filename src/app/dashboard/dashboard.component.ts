@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DashbordServiceService } from '../services/dashbord/dashbord-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,20 @@ export class DashboardComponent {
   toggleBtn: any
   mainDashbord: any
   homeSearchQuery = '';
-  OnInit() {
+  constructor(private server: DashbordServiceService, private router: Router) {
+    this.server.getUser().subscribe(
+      res => {
+        this.server.user = res
+        if (!this.server.user.isAdmin) {
+          this.router.navigate(['/'])
+        }
+      }, err => {
+        console.log(err)
+        this.router.navigate(['/logIn'])
+      }
+    )
+  }
+  ngOnInit() {
 
   }
   toggleSidebar = () => {

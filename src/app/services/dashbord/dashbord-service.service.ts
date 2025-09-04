@@ -1,12 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashbordServiceService {
-  apiurl = "http://localhost:3000"
+  user:any
+  apiurl = "https://movies-back-end-eta.vercel.app"
   searchOFMovies = [];
   SearchQueryServer: any
   page: number = 1
@@ -35,25 +36,48 @@ export class DashbordServiceService {
 
 
   getItemsOfMovies(page: number, searchItems?: string): Observable<any> {
-  let params = new HttpParams();
-  if (searchItems) {
-    params = params.set('searchItems', searchItems);
+    let params = new HttpParams();
+    if (searchItems) {
+      params = params.set('searchItems', searchItems);
+    }
+    return this.http.get<any[]>(`${this.apiurl}/NumberOFPage=${page}`, { params });
   }
-  return this.http.get<any[]>(`${this.apiurl}/NumberOFPage=${page}`, { params });
-}
   getMovieById(id: any): Observable<any[]> {
     console.log(`${this.apiurl}/${id}`)
     return this.http.get<any[]>(`${this.apiurl}/${id}`)
   }
   deleteMovie(id: any): Observable<any> {
 
-  return this.http.delete<any[]>(`${this.apiurl}/${id}`);
-}
+    return this.http.delete<any[]>(`${this.apiurl}/${id}`);
+  }
   updateMovie(id: string, updateData: any) {
     return this.http.put(`${this.apiurl}/${id}`, updateData);
   }
-  createMovie( Data: any) {
+  createMovie(Data: any) {
     return this.http.post(`${this.apiurl}`, Data);
   }
+  // movies.service.ts
+  getStatsByDate() {
+    return this.http.get<{ date: string, count: number }[]>(`${this.apiurl}/stats/by-date`);
+  }
+   getMovies(): Observable<any> {
+  return this.http.get<any[]>(this.apiurl);}
+numberOFVisits():Observable<any>{
+return this.http.get<any[]>(`${this.apiurl}/visits`);}
 
+ addvisite(): Observable<any> {
+  console.log(1)
+     return this.http.post(`${this.apiurl}/visits`,{})
+  }
+  // ✅ جلب بيانات المستخدم الحالي
+  getUser(): Observable<any> {
+    return this.http.get(`${this.apiurl}/user`, { withCredentials: true }).pipe(
+      tap((response: any) => {
+        this.user = response;
+      }),
+      catchError((error) => {
+        return throwError(() => new Error(error.error.message || 'same thing error'));
+      })
+    );
+  }
 }

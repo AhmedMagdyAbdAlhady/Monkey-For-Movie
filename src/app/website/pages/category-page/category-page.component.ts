@@ -33,7 +33,6 @@ export class CategoryPageComponent {
       }
       this.spinner.show()
       this.getdata.getSpecialCategory(categoryName).subscribe((res) => {
-        console.log(res)
         if (!res || res.length === 0) {
           this.router.navigate(['/not-found']);
         } else {

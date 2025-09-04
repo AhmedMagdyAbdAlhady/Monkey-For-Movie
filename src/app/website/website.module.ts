@@ -20,6 +20,7 @@ import { LogInComponent } from './pages/log-in/log-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SingupComponent } from './pages/singup/singup.component';
 import { WatchingComponent } from './pages/watching/watching.component';
+import { HistoryComponent } from './pages/history/history.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { WatchingComponent } from './pages/watching/watching.component';
     LogInComponent,
     SingupComponent,
     WatchingComponent,
-  ],
+    HistoryComponent,
+ ],
   imports: [
     CommonModule,
     WebsiteRoutingModule,

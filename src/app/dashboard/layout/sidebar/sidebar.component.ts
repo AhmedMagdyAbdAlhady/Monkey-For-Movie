@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashbordServiceService } from './../../../services/dashbord/dashbord-service.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent {
    sidebar:any
+  constructor(public server: DashbordServiceService) { }
 
-OnInit(){
-    
+ngOnInit(){
+ 
 }
 // toggleSidebar = () => {
 //   console.log("onclick arrow")

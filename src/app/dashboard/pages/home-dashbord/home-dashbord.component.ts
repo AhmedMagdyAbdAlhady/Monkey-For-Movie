@@ -30,7 +30,6 @@ export class HomeDashbordComponent {
       (data) => {
         this.items = data.Movies;
         this.totalPages = data.NumberOFPage;
-        console.log("Pages:", this.totalPages);
       },
       (err) => {
         console.log('Error fetching data', err);

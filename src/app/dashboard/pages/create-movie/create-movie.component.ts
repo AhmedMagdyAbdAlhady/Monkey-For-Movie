@@ -53,7 +53,7 @@ export class CreateMovieComponent {
       this.previewTrailerUrl = this.urlTrailer
       this.previewTrailer = this.sanitizer.bypassSecurityTrustResourceUrl(this.urlTrailer);
     }
-    console.log("url movies", this.previewTrailer)
+    console.log("url movies", this.previewTrailerUrl)
   }
   handelGennresInpout() {
     this.genres.push(``);

@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetDataService {
-  apiurl = "http://localhost:3000/"
+  apiurl = "https://movies-back-end-eta.vercel.app"
   constructor(private http: HttpClient) { }
   getSpecialCategory(categoryName: any): Observable<any> {
     return this.http.get<any[]>(this.apiurl).pipe(
@@ -24,11 +24,11 @@ export class GetDataService {
       }))
   }
   getMovieById(id: any): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiurl}${id}`).pipe(
+    return this.http.get<any[]>(`${this.apiurl}/${id}`).pipe(
       map(categories => {
-        console.log(categories)
         return categories
   })
     );
   }
+ 
 }

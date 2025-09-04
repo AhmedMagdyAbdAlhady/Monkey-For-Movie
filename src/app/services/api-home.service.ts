@@ -7,7 +7,7 @@ import { map, Observable } from 'rxjs';
 })
 export class ApiHomeService {
 
-  apiurl = "http://localhost:3000"
+  apiurl = "https://movies-back-end-eta.vercel.app"
 
   constructor(private http: HttpClient) { }
   // getMovies(): Observable<any> {
