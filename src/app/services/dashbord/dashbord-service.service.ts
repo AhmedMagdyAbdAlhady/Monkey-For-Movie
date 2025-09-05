@@ -40,7 +40,7 @@ export class DashbordServiceService {
     if (searchItems) {
       params = params.set('searchItems', searchItems);
     }
-    return this.http.get<any[]>(`${this.apiurl}/NumberOFPage=${page}`, { params });
+    return this.http.get<any[]>(`${this.apiurl}/movies/NumberOFPage=${page}`, { params });
   }
   getMovieById(id: any): Observable<any[]> {
     console.log(`${this.apiurl}/${id}`)

@@ -22,9 +22,7 @@ export class WebsiteComponent implements OnInit {
     // ⬅️ Register the visit upon first loading (refresh)
     const firstSegment = this.router.url.split('/')[1];
     if (firstSegment !== 'dashboard') {
-      this.visite.addvisite().subscribe(
-        res=>console.log(res)
-      )
+      this.visite.addvisite()
     }
     // ⬅️ Record the visit when moving inside Angular
     // this.router.events
