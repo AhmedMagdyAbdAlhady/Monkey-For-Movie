@@ -44,24 +44,24 @@ export class DashbordServiceService {
   }
   getMovieById(id: any): Observable<any[]> {
     console.log(`${this.apiurl}/${id}`)
-    return this.http.get<any[]>(`${this.apiurl}/${id}`)
+    return this.http.get<any[]>(`${this.apiurl}/movies/${id}`)
   }
   deleteMovie(id: any): Observable<any> {
 
-    return this.http.delete<any[]>(`${this.apiurl}/${id}`);
+    return this.http.delete<any[]>(`${this.apiurl}/movies/${id}`);
   }
   updateMovie(id: string, updateData: any) {
-    return this.http.put(`${this.apiurl}/${id}`, updateData);
+    return this.http.put(`${this.apiurl}/movies/${id}`, updateData);
   }
   createMovie(Data: any) {
-    return this.http.post(`${this.apiurl}`, Data);
+    return this.http.post(`${this.apiurl}/movies`, Data);
   }
   // movies.service.ts
   getStatsByDate() {
-    return this.http.get<{ date: string, count: number }[]>(`${this.apiurl}/stats/by-date`);
+    return this.http.get<{ date: string, count: number }[]>(`${this.apiurl}/movies/stats/by-date`);
   }
    getMovies(): Observable<any> {
-  return this.http.get<any[]>(this.apiurl);}
+  return this.http.get<any[]>(`${this.apiurl}/movies`);}
 numberOFVisits():Observable<any>{
 return this.http.get<any[]>(`${this.apiurl}/visits`);}
 
