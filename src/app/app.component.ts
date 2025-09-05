@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './website/srever/auth.service';
 import { DashbordServiceService } from './services/dashbord/dashbord-service.service';
-
+import { environment } from '../environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    console.log({ "urlbackend":environment.apiUrl})
     // ✅ تحميل التوكن من الكوكيز
     this.authService.initializeauth_token();
 

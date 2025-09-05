@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   islogIn: boolean = false;
-  private apiUrl ="https://movies-back-end-eta.vercel.app";
+  private apiUrl =environment.apiUrl;
   auth_tokenSubject = new BehaviorSubject<string | null>(this.getCookie('auth_token'));
   auth_token$ = this.auth_tokenSubject.asObservable();
   user: any = null;

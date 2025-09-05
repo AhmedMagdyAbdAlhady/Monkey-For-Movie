@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiHomeService {
 
-  apiurl = "https://movies-back-end-eta.vercel.app"
+  // apiurl = "https://movies-back-end-eta.vercel.app"
 
+  apiurl = `${environment.apiUrl}/movies`
   constructor(private http: HttpClient) { }
   // getMovies(): Observable<any> {
   //   return this.http.get(this.apiurl)

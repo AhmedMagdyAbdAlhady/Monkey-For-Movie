@@ -1,13 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
-
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class DashbordServiceService {
   user:any
-  apiurl = "https://movies-back-end-eta.vercel.app"
+  apiurl =environment.apiUrl
   searchOFMovies = [];
   SearchQueryServer: any
   page: number = 1
