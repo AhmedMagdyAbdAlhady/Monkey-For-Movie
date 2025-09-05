@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,7 +10,7 @@ import 'swiper/css/thumbs';
   templateUrl: './slider-header.component.html',
   styleUrl: './slider-header.component.css'
 })
-export class SliderHeaderComponent {
+export class SliderHeaderComponent implements AfterViewInit {
   @Input() sliderHeader: any;
   @Input() categoryHeader: any;
   swiperfunction() {
@@ -50,6 +50,23 @@ export class SliderHeaderComponent {
         thumbs: {
           swiper: swipermain,
         },
+        breakpoints: {
+    // للموبايل (أقل من 768px)
+    0: {
+      slidesPerView: 1,  // صورة واحدة أكبر
+      spaceBetween: 5,
+    },
+    // التابلت
+    768: {
+      slidesPerView: "auto",
+      spaceBetween: 5,
+    },
+    // الديسكتوب
+    1024: {
+      slidesPerView: "auto",
+      spaceBetween: 5,
+    }
+  }
       });
     }, 5000); // Small delay to ensure DOM is ready
   }

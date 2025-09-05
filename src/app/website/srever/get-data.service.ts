@@ -30,6 +30,6 @@ export class GetDataService {
         return categories
   })
     );
-  }
+  } 
  
 }
