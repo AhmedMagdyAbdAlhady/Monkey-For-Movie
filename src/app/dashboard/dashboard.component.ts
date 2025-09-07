@@ -36,6 +36,7 @@ export class DashboardComponent {
     this.mainDashbord = document.querySelector('.contentDashbord');
     this.toggleBtn.classList.toggle("collapsed")
     this.mainDashbord.classList.toggle("collapsed")
+    this.sidebar[0].childNodes[0].classList.toggle('collapsedParentSlidbar');
     this.sidebar[0].childNodes[0].firstChild.firstChild.classList.toggle('collapsed');
 
     // this.sidebar[0].childNodes.forEach((element: any) => {

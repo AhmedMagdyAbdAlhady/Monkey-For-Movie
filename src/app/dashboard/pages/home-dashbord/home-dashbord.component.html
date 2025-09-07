@@ -5,26 +5,26 @@
 
   <table class="table table-bordered table-hover text-center">
     <thead class="table-dark ">
-      <tr>
-        <th style="width: 2%;">#</th>
+      <tr >
+        <th class="dis-sm-none"   style="width: 2%;">#</th>
         <th style="width: 10%;">poster</th>
-        <th style="width: 20%;">Name</th>
-        <th style="width: 35%;">Description</th>
-        <th style="width: 15%;">category</th>
+        <th  style="width: 20%;">Name</th>
+        <th class="dis-sm-none" style="width: 35%;">Description</th>
+        <th class="dis-sm-none" style="width: 15%;">category</th>
         <th style="width: 20%;">process</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of items; let i = index">
-        <td>{{ i + 1 }}</td>
+      <tr  *ngFor="let item of items; let i = index">
+        <td class="dis-sm-none" >{{ i + 1 }}</td>
         <td>
           <img style="width: 40px;" [src]="item.poster_path " [alt]="item.title ">
         </td>
         <td>{{ item.title }}</td>
-        <td ><div class="description">
+        <td  class="dis-sm-none"><div class="description">
           {{ item.overview }}
         </div></td>
-        <td>{{ item.collectionName }}</td>
+        <td class="dis-sm-none">{{ item.collectionName }}</td>
         <td>
           <button class="btn btn-sm btn-warning me-2" (click)="editItem(item)">Edit</button>
           <button class="btn btn-sm btn-danger" (click)="deleteItem(item._id)">Delete</button>

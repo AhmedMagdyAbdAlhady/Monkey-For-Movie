@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class SingupComponent implements CanComponentDeactivate{
   avatar: File | null = null;
   avatarPreview: string | ArrayBuffer | null = null;
-
+  typeInput= true
   signupForm: any
   isSubmitted = false;
   logInControl: any;
@@ -110,7 +110,9 @@ export class SingupComponent implements CanComponentDeactivate{
 }
 
 
-
+ showAndhide():void{
+    this.typeInput =!this.typeInput
+  }
   canDeactivate(): boolean {
     if (this.signupForm.dirty && !this.isSubmitted) {
       return confirm("Are you sure you want to leave without saving?");

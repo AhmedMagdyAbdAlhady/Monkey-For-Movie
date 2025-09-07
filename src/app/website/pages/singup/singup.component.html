@@ -148,13 +148,23 @@
       <!-- Password -->
       <div class="mb-3 col-12">
         <label for="password" class="form-label">Password</label>
-        <input
+      <div class="position-relative">
+          <input
           type="password"
           formControlName="password"
           class="form-control"
           autocomplete="new-password"
           id="password"
         />
+        <span *ngIf="typeInput"
+          class="position-absolute top-50 end-0 translate-middle-y pe-2"
+            ><i class="fa-solid fa-eye text-secondary" (click)="showAndhide()"></i
+          ></span>
+          <span *ngIf="!typeInput"
+          class="position-absolute top-50 end-0 translate-middle-y pe-2"
+            ><i class="fa-solid fa-eye-slash text-secondary" (click)="showAndhide()"></i
+          ></span>
+      </div>
         <div class="text-danger mt-1">
           <span
             *ngIf="formControls.password.errors?.['required'] && (isSubmitted || formControls.password.touched)"
@@ -173,13 +183,23 @@
       <!-- Confirm Password -->
       <div class="mb-3 col-12">
         <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input
+       <div class="position-relative">
+         <input
           type="password"
           formControlName="confirmPassword"
           class="form-control"
           autocomplete="new-password"
           id="confirmPassword"
         />
+        <span *ngIf="typeInput"
+          class="position-absolute top-50 end-0 translate-middle-y pe-2"
+            ><i class="fa-solid fa-eye text-secondary" (click)="showAndhide()"></i
+          ></span>
+          <span *ngIf="!typeInput"
+          class="position-absolute top-50 end-0 translate-middle-y pe-2"
+            ><i class="fa-solid fa-eye-slash text-secondary" (click)="showAndhide()"></i
+          ></span>
+       </div>
         <div class="text-danger mt-1">
           <span
             *ngIf="formControls.confirmPassword.errors?.['required'] && (isSubmitted || formControls.confirmPassword.touched)"

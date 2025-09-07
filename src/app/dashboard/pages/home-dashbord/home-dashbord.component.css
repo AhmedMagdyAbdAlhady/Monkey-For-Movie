@@ -11,3 +11,8 @@ td {
    vertical-align: middle;
 
 }
+@media (max-width: 575.98px) { 
+  .dis-sm-none{
+    display: none;
+}
+ }

@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './log-in.component.css'
 })
 export class LogInComponent {
+  typeInput= true
   constructor(private authService: AuthService, private Router: Router, private toastr: ToastrService) { }
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required, Validators.minLength(10)]),
@@ -40,6 +41,9 @@ export class LogInComponent {
         }
       );
     }
+  }
+  showAndhide():void{
+    this.typeInput =!this.typeInput
   }
   ngOnInit() {
 

@@ -20,8 +20,28 @@
 
 }
 .contentDashbord{
-    width: 100%;
+    width: 95%;
     &.collapsed{
-        width: 100%;
+        width: 85%;
     }
+}
+.parentSlidbar{
+    width: 5%;
+}
+.collapsedParentSlidbar{
+    width: 15%;
+}
+@media (max-width: 575.98px) {
+    .contentDashbord{
+    width: 80%;
+    &.collapsed{
+        width: 80%;
+    }
+}
+.parentSlidbar{
+    width: 20%;
+}
+.collapsedParentSlidbar{
+    width: 70%;
+}
 }
