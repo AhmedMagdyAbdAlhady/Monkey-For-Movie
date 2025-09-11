@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@ang
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { DashbordServiceService } from '../../../services/dashbord/dashbord-service.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../website/srever/auth.service';
+import { Router } from '@angular/router';
 
 // Register chart components
 Chart.register(...registerables);
@@ -19,9 +21,16 @@ export class AnalyticsComponent implements AfterViewInit, OnDestroy {
   @ViewChild('visitsChartParHoure') visitsChartParHoure!: ElementRef<HTMLCanvasElement>;
   chart!: Chart;
   constructor(private moviesService: DashbordServiceService,
-    private http: HttpClient
+    private http: HttpClient,
+    private user: AuthService,
+    private router: Router
 
   ) { }
+  ngOnInit() {
+    if (!this.user.user.isAdmin) {
+      this.router.navigateByUrl('/')
+    }
+  }
   ngAfterViewInit(): void {
     this.moviesService.getStatsByDate().subscribe(data => {
       const Labels = data.map(d => d.date);
@@ -152,8 +161,8 @@ export class AnalyticsComponent implements AfterViewInit, OnDestroy {
           hour: '2-digit', hour12: false
         });
       }
-    );
-      
+      );
+
 
       const counts = data.map((v: any) => v.count);
 

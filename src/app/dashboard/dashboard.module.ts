@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { EditComponent } from './pages/edit/edit.component';
 import { CreateMovieComponent } from './pages/create-movie/create-movie.component';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 
@@ -34,6 +35,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
     EditComponent,
     CreateMovieComponent,
     AnalyticsComponent,
+    UsersComponent,
   ],
   imports: [
     CommonModule,

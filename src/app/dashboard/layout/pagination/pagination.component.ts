@@ -8,6 +8,7 @@ import { DashbordServiceService } from '../../../services/dashbord/dashbord-serv
   styleUrl: './pagination.component.css'
 })
 export class PaginationComponent implements OnInit, OnChanges {
+  @Input() typeofPage: string | undefined
   @Input() numberOfPage: number = 1; // إجمالي عدد الصفحات
   @Output() pageChange = new EventEmitter<number>(); // لما المستخدم يغير الصفحة
   @Input() searchQuery: any = '';
@@ -22,27 +23,42 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['numberOfPage']) {
+    this.service.setCurrentPage(this.activePage)
       this.getPages();
     }
   }
 
- getPages() {
-  this.service.getItemsOfMovies(1, this.searchQuery).subscribe(
-    (res) => {
-      const totalPages = res.NumberOFPage || 1;
-      this.countPage = Array.from({ length: totalPages }, (_, i) => i + 1);
-      this.activePage = 1;
-      this.pageChange.emit(this.activePage);
-    },
-    (err) => {
-      console.error('Error loading pages:', err);
+  getPages() {
+    if (this.typeofPage == "users") {
+      this.service.getItemsOfUsers(1, this.searchQuery).subscribe(
+        (res) => {
+          const totalPages = res.NumberOFPage || 1;
+          this.countPage = Array.from({ length: totalPages }, (_, i) => i + 1);
+          this.activePage = 1;
+          this.pageChange.emit(this.activePage);
+        },
+        (err) => {
+          console.error('Error loading pages:', err);
+        }
+      );
     }
-  );
-}
+    this.service.getItemsOfMovies(1, this.searchQuery).subscribe(
+      (res) => {
+        const totalPages = res.NumberOFPage || 1;
+        this.countPage = Array.from({ length: totalPages }, (_, i) => i + 1);
+        this.activePage = 1;
+        this.pageChange.emit(this.activePage);
+      },
+      (err) => {
+        console.error('Error loading pages:', err);
+      }
+    );
+  }
 
   setActivePage(page: number) {
     if (page >= 1 && page <= this.countPage.length) {
       this.activePage = page;
+      this.service.setCurrentPage(this.activePage)
       this.pageChange.emit(this.activePage);
     }
   }
@@ -63,7 +79,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     const totalVisible = 4;
     const total = this.countPage.length;
     const current = this.activePage;
-
+    this.service.setCurrentPage(this.activePage)
     let pages: number[] = [];
 
     const start = Math.max(2, current - Math.floor(totalVisible / 2));

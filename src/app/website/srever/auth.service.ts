@@ -66,7 +66,7 @@ export class AuthService {
   getProfile(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/user/profile`, { withCredentials: true });
   }
-  editUser(formData: FormData,id:any): Observable<any> {
+  editUser(formData: any,id:any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/user/${id}`, formData, { withCredentials: true }).pipe(
       tap((response: any) => {
         this.user = response.userDetails;

@@ -1,0 +1,307 @@
+<div class="container">
+  <div class="movies">
+    <div class="container-fluid mt-4">
+      <h2 class="mb-3 text-white text-center">List of users</h2>
+
+      <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+          <tr>
+            <th class="dis-sm-none" style="width: 2%">#</th>
+            <th>avatar</th>
+            <th>userName</th>
+            <th class="dis-sm-none">frist name</th>
+            <th class="dis-sm-none">last name</th>
+            <th class="dis-sm-none">email</th>
+            <th>process</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items; let i = index">
+            <td class="dis-sm-none">{{ i + 1 }}</td>
+            <td>
+              <img
+                style="width: 40px"
+                [src]="item?.avatar"
+                [alt]="item.userName"
+              />
+            </td>
+            <td>{{ item.userName }}</td>
+            <td class="dis-sm-none">
+              <div>
+                {{ item.firstName }}
+              </div>
+            </td>
+            <td class="dis-sm-none">{{ item.lastName }}</td>
+            <td class="dis-sm-none">{{ item.email }}</td>
+            <td>
+              <button
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                class="btn btn-sm btn-warning mb-1 me-2"
+                (click)="editItem(item._id)"
+              >
+                Edit
+              </button>
+              <button
+                *ngIf="!item.isAdmin"
+                class="btn btn-sm btn-danger mb-1 me-2"
+                (click)="deleteItem(item._id)"
+              >
+                Delete
+              </button>
+              <button
+                *ngIf="!item.isAdmin && item.isSupport"
+                class="btn mb-1 btn-sm btn-danger me-2"
+                (click)="changeSupport(item._id)"
+              >
+                Delete support
+              </button>
+              <button
+                *ngIf="!item.isAdmin && !item.isSupport"
+                class="btn mb-1 btn-sm btn-success"
+                (click)="changeSupport(item._id)"
+              >
+                Add support
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div>
+    <app-pagination
+      typeofPage="users"
+      [numberOfPage]="totalPages"
+      [searchQuery]="currentQuery"
+      (pageChange)="loadPageUser($event, currentQuery)"
+    >
+    </app-pagination>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">edit user</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <div
+              class="profile-card col-12 bg-white p-4 rounded position-relative"
+              *ngIf="user"
+            >
+              
+              <!-- Avatar -->
+              <section class="row justify-content-center">
+                <div
+                  class="d-flex justify-content-center col-5 mb-4 position-relative"
+                >
+                  <div class="position-relative">
+                    <!-- صورة البروفايل -->
+                    <img
+                      *ngIf="avatarPreview; else noAvatar"
+                      [src]="avatarPreview"
+                      class="rounded-circle border"
+                      alt="Avatar"
+                      width="200"
+                      height="200"
+                    />
+                    <ng-template #noAvatar>
+                      <img
+                        src="logo\Brown and Pink Illustrative Monkey Gaming Logo.png"
+                        alt="Default Avatar"
+                        class="rounded-circle border"
+                        width="200"
+                        height="200"
+                      />
+                    </ng-template>
+
+                    <!-- زر القلم -->
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle openEditImage"
+                      (click)="triggerFileInput(fileInput)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                  </div>
+
+                  <!-- input hidden -->
+                  <input
+                    type="file"
+                    #fileInput
+                    accept="image/*"
+                    (change)="onFileChange($event)"
+                    hidden
+                  />
+
+                  <!-- أزرار Save/Cancel -->
+                  <div *ngIf="iconEdit">
+                    <button
+                      class="btn btn-success btn-sm position-absolute saveEditImage"
+                      (click)="saveImage()"
+                    >
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm position-absolute cancelEditImage"
+                      (click)="cancelImageEditing()"
+                    >
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <!-- userName -->
+              <p class="position-relative mb-4 fs-5">
+                <ng-container
+                  *ngIf="editingField !== 'userName'; else edituserName"
+                >
+                  userName: {{ user.userName }}
+                  <span
+                    type="button"
+                    class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+                    (click)="startEditing('userName', user.userName)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </span>
+                </ng-container>
+                <ng-template #edituserName>
+                  <input [(ngModel)]="editedValue" class="form-control" name="userName"/>
+                  <button
+                    class="btn btn-success btn-sm mt-1"
+                    (click)="saveField()"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm mt-1"
+                    (click)="cancelEditing()"
+                  >
+                    Cancel
+                  </button>
+                </ng-template>
+              </p>
+
+              <!-- First Name -->
+              <p class="position-relative mb-4 fs-5">
+                <ng-container
+                  *ngIf="editingField !== 'firstName'; else editFirstName"
+                >
+                  First name: {{ user.firstName }}
+                  <span
+                    type="button"
+                    class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+                    (click)="startEditing('firstName', user.firstName)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </span>
+                </ng-container>
+                <ng-template #editFirstName>
+                  <input [(ngModel)]="editedValue" class="form-control" name="firstName"/>
+                  <button
+                    class="btn btn-success btn-sm mt-1"
+                    (click)="saveField()"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm mt-1"
+                    (click)="cancelEditing()"
+                  >
+                    Cancel
+                  </button>
+                </ng-template>
+              </p>
+
+              <!-- Last Name -->
+              <p class="position-relative mb-4 fs-5">
+                <ng-container
+                  *ngIf="editingField !== 'lastName'; else editLastName"
+                >
+                  Last name: {{ user.lastName }}
+                  <span
+                    type="button"
+                    class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+                    (click)="startEditing('lastName', user.lastName)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </span>
+                </ng-container>
+                <ng-template #editLastName>
+                  <input [(ngModel)]="editedValue" class="form-control" name="lastName"/>
+                  <button
+                    class="btn btn-success btn-sm mt-1"
+                    (click)="saveField()"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm mt-1"
+                    (click)="cancelEditing()"
+                  >
+                    Cancel
+                  </button>
+                </ng-template>
+              </p>
+
+              <!-- Email -->
+              <p class="position-relative mb-4 fs-5">
+                <ng-container *ngIf="editingField !== 'email'; else editEmail">
+                  Email: {{ user.email }}
+                  <span
+                    type="button"
+                    class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+                    (click)="startEditing('email', user.email)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </span>
+                </ng-container>
+                <ng-template #editEmail>
+                  <input [(ngModel)]="editedValue" class="form-control" name="email"/>
+                  <button
+                    class="btn btn-success btn-sm mt-1"
+                    (click)="saveField()"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm mt-1"
+                    (click)="cancelEditing()"
+                  >
+                    Cancel
+                  </button>
+                </ng-template>
+              </p>
+
+              <!-- Joined -->
+              <p class="fs-6">Joined: {{ user.createdAt | date : "medium" }}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -54,7 +54,7 @@
             >login</a
           >
         </li>
-        <li class="nav-item cursor-pointer btn-group" *ngIf="authService.user"    >
+        <li class="nav-item cursor-pointer btn-group" *ngIf="authService.user">
           <img
             *ngIf="authService.user.avatar"
             [src]="authService.user.avatar"
@@ -64,29 +64,35 @@
             width="10%"
             height="80%"
           />
-          
-          <button type="button" class="border-0  p-0 bg-dark " data-bs-toggle="dropdown" aria-expanded="false">
-            
-          <span class="text-white m-1 maxcharacter" >{{ authService.user.userName }}</span>
-          <i class="fa-solid fa-caret-down fs-5 " style="vertical-align: super;"></i>
+         
+            <i *ngIf="!authService.user.avatar" class="fa-solid fa-user text-white mt-2 fs-4"></i>
+          <button
+            type="button"
+            class="border-0 p-0 bg-dark"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="text-white m-1 maxcharacter">{{
+              authService.user.userName
+            }}</span>
+            <i
+              class="fa-solid fa-caret-down fs-5"
+              style="vertical-align: super"
+            ></i>
           </button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" routerLink="/profile">profile</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" routerLink="/history">history</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li *ngIf="authService.user.isAdmin||authService.user.isSupport">
+              <hr class="dropdown-divider" />
+            </li>
+            <li *ngIf="authService.user.isAdmin||authService.user.isSupport">
+              <a class="dropdown-item" routerLink="/dashboard">dashboard</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" (click)="logout()">logout</a></li>
-            
           </ul>
-        
-          <a
-            class="nav-link"
-            *ngIf="!authService.user.avatar"
-            aria-current="page"
-            routerLinkActive="text-danger"
-            ><i class="fa-solid fa-user" ></i>
-            {{ authService.user?.username }}</a
-          >
         </li>
       </ul>
     </div>

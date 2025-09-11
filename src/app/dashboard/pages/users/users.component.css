@@ -1,0 +1,85 @@
+td {
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+@media (max-width: 575.98px) {
+  .dis-sm-none {
+    display: none;
+  }
+}
+
+/* src/app/components/profile/profile.component.css */
+.profile-card {
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.close {
+  width: 38px;
+  height: 38px;
+  top: -30px;
+  right: 0px;
+
+}
+
+.openEditImage {
+  right: -25px !important;
+  top: 50% !important;
+  bottom: auto !important;
+}
+
+.saveEditImage {
+  border-radius: 50%;
+
+  left: 75%;
+  bottom: 0%;
+  animation-duration: 4s;
+  animation-name: saveAnimation;
+}
+
+.cancelEditImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  left: 85%;
+  top: 10%;
+  animation-duration: 4s;
+  animation-name: cancelAnimation;
+}
+
+@keyframes cancelAnimation {
+  from {
+    left: 94%;
+    top: 50%;
+  }
+
+  to {
+    left: 85%;
+    top: 10%;
+  }
+}
+
+@keyframes saveAnimation {
+  from {
+    left: 94%;
+    bottom: 35%;
+  }
+
+  to {
+    left: 75%;
+    bottom: 0%;
+  }
+}

@@ -13,3 +13,9 @@
   position: relative;
   left: 0;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
+.text-shadow{
+  text-shadow: 0px 1px 20px red ;
+}

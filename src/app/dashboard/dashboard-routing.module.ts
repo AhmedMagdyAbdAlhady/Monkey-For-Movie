@@ -5,6 +5,7 @@ import { HomeDashbordComponent } from './pages/home-dashbord/home-dashbord.compo
 import { EditComponent } from './pages/edit/edit.component';
 import { CreateMovieComponent } from './pages/create-movie/create-movie.component';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [{
   path: '', component: DashboardComponent,
@@ -12,6 +13,7 @@ const routes: Routes = [{
     { path: 'home', component: HomeDashbordComponent },
     { path: 'create', component: CreateMovieComponent },
     { path: 'Analytics', component: AnalyticsComponent },
+    { path: 'users', component: UsersComponent },
     { path: 'edit/:id', component: EditComponent },
         { path: '', redirectTo: "home",pathMatch: 'full'  },
 

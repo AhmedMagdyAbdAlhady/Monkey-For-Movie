@@ -70,5 +70,23 @@ export class HeaderComponent {
       }
     );
   }
+  logout(): void {
+  this.authService.user = "";
+  this.router.navigate(['/logIn'])
+  this.authService.logout().subscribe(
+    (res) => {
+
+      // this.authService.islogIn= true
+      // console.log('✅ تسجيل الخروج بنجاح',this.authService.islogIn);
+    },
+    (error) => {
+      console.log(error.message); 
+    },()=>{
+  console.log(this.authService.isAuthenticated())
+  // console.log(this.authService.user)
+    }
+  );
+}
+
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashbordServiceService } from './../../../services/dashbord/dashbord-service.service';
+import { AuthService } from '../../../website/srever/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +10,11 @@ import { DashbordServiceService } from './../../../services/dashbord/dashbord-se
 })
 export class SidebarComponent {
    sidebar:any
-  constructor(public server: DashbordServiceService) { }
+   user:any
+  constructor(public server: DashbordServiceService,public auth: AuthService) { }
 
 ngOnInit(){
- 
+ this.user= this.auth.user
 }
 // toggleSidebar = () => {
 //   console.log("onclick arrow")

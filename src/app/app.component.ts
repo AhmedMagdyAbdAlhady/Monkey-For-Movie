@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    console.log({ "urlbackend":environment.apiUrl})
     // ✅ تحميل التوكن من الكوكيز
     this.authService.initializeauth_token();
 

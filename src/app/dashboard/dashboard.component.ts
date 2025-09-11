@@ -17,11 +17,10 @@ export class DashboardComponent {
     this.server.getUser().subscribe(
       res => {
         this.server.user = res
-        if (!this.server.user.isAdmin) {
+        if (!this.server.user.isSupport) {
           this.router.navigate(['/'])
         }
       }, err => {
-        console.log(err)
         this.router.navigate(['/logIn'])
       }
     )
